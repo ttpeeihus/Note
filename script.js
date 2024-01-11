@@ -4,7 +4,7 @@
 
     // Biến toàn cục để theo dõi số lượng tháng được giảm đi
     let monthOffset = 0;
-
+    let yearoffset = 0;
     // Danh sách các ngày cần bôi màu (định dạng: "YYYY-MM-DD")
     const highlightedDates = [
         "2023-07-20",
@@ -208,12 +208,11 @@
         const lunarDate = convertSolar2Lunar(date, month + 1, year, timeZone);
         return lunarDate[0] === 15;
     }
-
     // Hàm tạo bảng lịch
     function createCalendar() {
         const calendarContainer = document.getElementById("calendar");
         const today = new Date();
-        let year = today.getFullYear() + Math.floor((monthOffset+today.getMonth()) / 12);
+        let year = today.getFullYear() + Math.floor((monthOffset+today.getMonth()) / 12) + yearoffset;
         let month = (today.getMonth() + monthOffset) % 12;
 
         // Kiểm tra nếu tháng hoặc năm bị quay lại năm hoặc năm tiếp theo
@@ -344,9 +343,146 @@
         monthOffset++;
         createCalendar();
     }
+    function prevYear() {
+        yearoffset--;
+        createCalendar();
+    }
+    
+    // Hàm chuyển đến năm sau
+    function nextYear() {
+        yearoffset++;
+        createCalendar();
+    }
 
     // Gọi hàm tạo bảng lịch khi trang web được tải
     document.addEventListener("DOMContentLoaded", createCalendar);
+
+    function displayYearCalendar() {
+        const calendarContainer = document.getElementById("calendar");
+        const today = new Date();
+        let year = currentYear; // Sử dụng năm hiện tại hoặc có thể thay đổi thành năm khác nếu cần
+    
+        // Xóa nội dung cũ
+        calendarContainer.innerHTML = '';
+    
+        // Tạo một div mới để chứa lịch cả năm
+        const yearCalendarDiv = document.createElement("div");
+    
+        // Hiển thị lịch cho từng tháng trong năm
+        for (let month = 0; month < 12; month++) {
+            // Tạo một cell cho mỗi tháng
+            const monthCell = document.createElement("div");
+            monthCell.classList.add("month-cell");
+    
+            // Gọi hàm tạo bảng lịch cho từng tháng
+            createMonthTable(year, month, monthCell);
+    
+            // Thêm cell vào lịch cả năm
+            yearCalendarDiv.appendChild(monthCell);
+        }
+    
+        // Thêm lịch cả năm vào container
+        calendarContainer.appendChild(yearCalendarDiv);
+    }
+    
+
+    function createMonthTable(year, month, cell) {
+        const today = new Date();
+        const currentMonth = today.getMonth();
+        const currentYear = today.getFullYear();
+    
+        const months = [
+            "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6",
+            "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
+        ];
+    
+        const daysInMonth = [
+            31, isLeapYear(year) ? 29 : 28, 31, 30, 31, 30,
+            31, 31, 30, 31, 30, 31
+        ];
+    
+        const firstDayOfMonth = new Date(year, month, 1);
+        let startingDay = firstDayOfMonth.getDay();
+        startingDay = (startingDay === 0) ? 6 : startingDay - 1;
+    
+        const table = document.createElement("table");
+        const thead = document.createElement("thead");
+        const tbody = document.createElement("tbody");
+    
+        const headerRow = document.createElement("tr");
+        const monthHeader = document.createElement("th");
+        monthHeader.colSpan = 7;
+        monthHeader.textContent = months[month] + " " + year;
+        headerRow.appendChild(monthHeader);
+        thead.appendChild(headerRow);
+    
+        const daysHeaderRow = document.createElement("tr");
+        const days = ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ Nhật"];
+        for (const day of days) {
+            const dayHeader = document.createElement("th");
+            dayHeader.textContent = day;
+            daysHeaderRow.appendChild(dayHeader);
+        }
+        thead.appendChild(daysHeaderRow);
+    
+        let date = 1;
+        for (let i = 0; i < 6; i++) {
+            const row = document.createElement("tr");
+            for (let j = 0; j < 7; j++) {
+                if (i === 0 && j < startingDay) {
+                    const emptyCell = document.createElement("td");
+                    row.appendChild(emptyCell);
+                } else if (date > daysInMonth[month]) {
+                    break;
+                } else {
+                    const cell = document.createElement("td");
+                    cell.textContent = date;
+                    if (year === currentYear && month === currentMonth && date === today.getDate()) {
+                        cell.classList.add("today");
+                    }
+    
+                    const lunarDate = convertSolar2Lunar(date, month + 1, year, 7.0);
+    
+                    const lunarCell = document.createElement("div");
+                    lunarCell.classList.add("lunar-date");
+                    lunarCell.textContent = lunarDate[0] + "/" + lunarDate[1];
+    
+                    cell.appendChild(lunarCell);
+    
+                    const formattedDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+                    if (highlightedDates.includes(formattedDate)) {
+                        cell.classList.add("highlighted");
+                    }
+                    const formatted = `${year}-${String(month + 1).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+                    if (highlighted.includes(formatted)) {
+                        cell.classList.add("highligh");
+                    }
+                    const isFirstDay = isFirstDayOfMonth(date, month, year, 7.0);
+                    const isFullMoon = isFullMoonDay(date, month, year, 7.0);
+                    const lunarFormatted = `${String(lunarDate[1]).padStart(2, '0')}-${String(lunarDate[0]).padStart(2, '0')}`;
+                    if (isFirstDay || isFullMoon || highlightedlunar.includes(lunarFormatted)) {
+                        lunarCell.classList.add("highlighlunar");
+                    }
+                    if (highlightedlunar.includes(lunarFormatted)) {
+                        lunarCell.classList.add("highlighgio");
+                        lunarCell.textContent = lunarDate[0] + "/" + lunarDate[1] + "(Giỗ)";
+                    }
+                    if (highlightedluong.includes(formatted)) {
+                        cell.classList.add("highlighluong");
+                    }
+                    row.appendChild(cell);
+                    date++;
+                }
+            }
+            tbody.appendChild(row);
+        }
+    
+        table.appendChild(thead);
+        table.appendChild(tbody);
+    
+        cell.appendChild(table);
+    }
+    
 
 
 //Gpa
