@@ -1,0 +1,242 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+#tkb,#login{
+  display:none;
+}
+#button button {
+  top:10px;
+  left:10px;
+  z-index:1;
+  background-color: #f5b971; /* Màu cam nhạt cho nút */
+  color: #fff; /* Màu chữ trắng cho nút */
+  border: none;
+  text-align: center;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin: 5px;
+  font-weight: bold;
+  border-radius: 5px; /* Bo tròn các góc của nút */
+}
+
+#calenda {
+    line-height: 1.6;
+    text-align: center;
+    margin: 30px auto;
+    max-width: 600px;
+}
+  
+#calenda h1 {
+    color: #555;
+}
+
+#calenda #calendar {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+#calenda thead th {
+    padding: 10px;
+    font-weight: bold;
+    background-color: #f5b971; /* Màu cam nhạt cho tiêu đề */
+    border-bottom: 2px solid #ccc;
+    color: #fff; /* Màu chữ trắng cho tiêu đề */
+}
+
+#calenda tbody td {
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+#calenda button {
+    background-color: #f5b971; /* Màu cam nhạt cho nút */
+    color: #fff; /* Màu chữ trắng cho nút */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin: 5px;
+    font-weight: bold;
+    border-radius: 5px; /* Bo tròn các góc của nút */
+}
+
+#calenda button:hover {
+    background-color: #f68e41; /* Màu cam đậm khi di chuột qua nút */
+}
+
+#calenda #navigation {
+    margin-top: 20px;
+}
+
+#calenda .highlighted {
+    background-color: #9aff9a; /* Màu cam nhạt cho ngày được bôi màu */
+    color: #fff; /* Màu chữ trắng cho ngày được bôi màu */
+    font-weight: bold;
+}
+
+#calenda .highligh {
+    background-color: #90fbff; /* Màu cam nhạt cho ngày được bôi màu */
+    color: #fff; /* Màu chữ trắng cho ngày được bôi màu */
+    font-weight: bold;
+}
+
+#calenda .lunar-date {
+    font-size: 12px;
+    color: #999;
+    margin-top: 5px;
+}
+
+#calenda .highlighlunar {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+#calenda .highlighgio {
+    color: #0026ff;
+    font-weight: bold;
+}
+
+#calenda .highlighluong {
+    color: #03ff57;
+    font-weight: bold;
+}
+
+#calenda tbody td.today {
+    background-color: rgb(12, 1, 61); /* Màu cam nhạt cho ngày hôm nay */
+    color: #ffffff; /* Màu chữ trắng cho ngày hôm nay */
+    font-weight: bold;
+}
+
+#tkb h1 {
+  text-align: center;
+  margin-top: 10px; /* Tạo khoảng cách từ đỉnh trang */
+  font-size: 24px; /* Tăng kích thước tiêu đề cho điện thoại */
+}
+
+@media screen and (max-width: 600px) {
+  /* Định dạng bảng thời khóa biểu */
+  #tkb table {
+      width: 100%; /* Chiếm toàn bộ chiều rộng của màn hình */
+      border-collapse: collapse;
+      margin-top: 20px;
+  }
+}
+
+#tkb table {
+  width: 50%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin: auto;
+}
+
+#tkb th, #tkb td {
+  border: 1px solid #ccc;
+  padding: 8px; /* Giảm khoảng cách trong ô */
+  text-align: center;
+}
+
+#tkb th {
+  background-color: #f2f2f2;
+  font-size: 18px; /* Tăng kích thước tiêu đề cột */
+}
+
+/* Định dạng các môn học */
+#tkb td[class^="mon"] {
+  font-size: 14px; /* Tăng kích thước chữ cho môn học */
+  padding: 2px; /* Giảm khoảng cách trong ô */
+}
+
+#tkb .hangngang {
+  background-color: rgb(154, 155, 255);
+  height: 10px; /* Giảm chiều cao hàng ngang */
+}
+
+#tkb .mon1 {
+  background-color: aquamarine;
+  border: none;
+}
+
+#tkb .mon2 {
+  background-color: rgb(189, 255, 233);
+  border: none;
+}
+
+#tkb .mon3 {
+  background-color: rgb(230, 255, 247);
+  border: none;
+  border-left: 1px solid #ccc;
+}
+
+#tkb .mon4 {
+  background-color: rgb(196, 255, 211);
+  border: none;
+  border-left: 1px solid #ccc;
+}
+
+#tkb .mon5 {
+  background-color: rgb(167, 255, 189);
+  border: none;
+  border-left: 1px solid #ccc;
+}
+
+#tkb .mon6 {
+  background-color: rgb(94, 255, 134);
+  border: none;
+  border-left: 1px solid #ccc;
+}
+
+#tkb .mon7 {
+  background-color: rgb(177, 168, 255);
+  border: none;
+  border-left: 1px solid #ccc;
+}
+
+#tkb .mon8 {
+  background-color: rgb(132, 118, 255);
+  border: none;
+  border-left: 1px solid #ccc;
+}
+
+#login button:active {
+  background-color: rgb(255, 166, 166);
+}
+
+#login .group {
+  padding-top: 15px;
+}
+
+#login .group label {
+  margin-left: 5%;
+  font-size: larger;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+#login .group input {
+  border: rgb(132, 247, 247) solid 2px;
+  border-radius: 10px;
+  height: 25px;
+  margin-left: 50px;
+}
+
+#login {
+  margin-top: 50px;
+  width: 30%;
+  height: 500px;
+  border: rgb(132, 247, 247) solid 1px;
+  background-color: rgb(121, 252, 165);
+  margin-left: 33%;
+  border-radius: 50px;
+}
+#login button {
+  margin-top: 30px;
+  margin-left: 30px;
+  height: 30px;
+  width: 60px;
+  border-radius: 10px;
+  border: rgb(132, 247, 247) solid 1px;
+  background-color: rgb(151, 152, 250);
+}
