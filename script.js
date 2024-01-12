@@ -343,6 +343,7 @@
         monthOffset++;
         createCalendar();
     }
+
     function prevYear() {
         yearoffset--;
         createCalendar();
@@ -351,6 +352,12 @@
     // Hàm chuyển đến năm sau
     function nextYear() {
         yearoffset++;
+        createCalendar();
+    }
+
+    function now() {
+        yearoffset=0;
+        monthOffset=0;
         createCalendar();
     }
 
